@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="NOTE_assets-eclipticnotes.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="left confirm0000" x="174" y="174" width="174" height="175" frameX="-9" frameY="-9" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="right confirm0000" x="0" y="174" width="174" height="175" frameX="-9" frameY="-9" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="up confirm0000" x="0" y="0" width="175" height="174" frameX="-9" frameY="-9" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="down confirm0000" x="175" y="0" width="175" height="174" frameX="-9" frameY="-9" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="blue0000" x="159" y="507" width="159" height="158" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="green0000" x="0" y="349" width="159" height="158" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="red0000" x="508" y="0" width="158" height="159" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="purple0000" x="666" y="0" width="158" height="159" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="arrowLEFT0000" x="508" y="159" width="158" height="159" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="arrowRIGHT0000" x="350" y="0" width="158" height="159" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="arrowUP0000" x="318" y="349" width="159" height="158" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="arrowDOWN0000" x="0" y="507" width="159" height="158" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="down press0000" x="318" y="507" width="159" height="158" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="up press0000" x="159" y="349" width="159" height="158" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="left press0000" x="508" y="318" width="158" height="159" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="right press0000" x="350" y="159" width="158" height="159" frameX="-17" frameY="-17" frameWidth="192" frameHeight="192"/>
+	<SubTexture name="green hold end0000" x="666" y="159" width="49" height="68" frameX="2" frameY="2" frameWidth="45" frameHeight="64"/>
+	<SubTexture name="green hold piece0000" x="715" y="159" width="49" height="48" frameX="2" frameY="2" frameWidth="45" frameHeight="44"/>
+	<SubTexture name="blue hold end0000" x="666" y="159" width="49" height="68" frameX="2" frameY="2" frameWidth="45" frameHeight="64"/>
+	<SubTexture name="blue hold piece0000" x="715" y="159" width="49" height="48" frameX="2" frameY="2" frameWidth="45" frameHeight="44"/>
+	<SubTexture name="purple hold end0000" x="666" y="159" width="49" height="68" frameX="2" frameY="2" frameWidth="45" frameHeight="64"/>
+	<SubTexture name="purple hold piece0000" x="715" y="159" width="49" height="48" frameX="2" frameY="2" frameWidth="45" frameHeight="44"/>
+	<SubTexture name="red hold end0000" x="666" y="159" width="49" height="68" frameX="2" frameY="2" frameWidth="45" frameHeight="64"/>
+	<SubTexture name="red hold piece0000" x="715" y="159" width="49" height="48" frameX="2" frameY="2" frameWidth="45" frameHeight="44"/>
+</TextureAtlas>
