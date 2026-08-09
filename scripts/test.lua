@@ -25,6 +25,7 @@ local TRAIL_DELAY_FRAMES = 2
 local cur_char_color = 0
 local char_color = 0
 
+local charComboMultiplier = 1
 
 
 local defaultCamZoom = 1;
@@ -102,10 +103,10 @@ end
 function goodNoteHit(id, noteData, noteType, isSustainNote)
     if not isSustainNote then 
         if bfComboTimer == 0 then
-            bfCombo = bfCombo + 1
+            bfCombo = bfCombo + charComboMultiplier
             doubleCombo = doubleCombo + 1
         end
-        bfCombo = bfCombo + bfComboTimer / 100
+        bfCombo = (bfCombo + bfComboTimer / 100) * charComboMultiplier
         doubleCombo = (doubleCombo + doubleComboTimer / 50 / 4) 
     end
     bfComboTimer = 150
@@ -127,10 +128,10 @@ end
 function opponentNoteHit(id, noteData, noteType, isSustainNote)
     if not isSustainNote then 
         if dadComboTimer == 0 then
-            dadCombo = dadCombo + 1
+            dadCombo = dadCombo + charComboMultiplier
             doubleCombo = doubleCombo + 1
         end
-        dadCombo = dadCombo + dadComboTimer / 100
+        dadCombo = dadCombo + (dadComboTimer / 100) * charComboMultiplier
         doubleCombo = (doubleCombo + doubleComboTimer / 50 / 4)
     end
     dadComboTimer = 150
@@ -301,6 +302,7 @@ function onUpdate(elapsed)
 end
 
 -- Creates two fixed-size trails once. FlxTrail internally reuses its sprites.
+
 function initCharacterTrails()
     setVar('eclipticBFCombo', 0)
     setVar('eclipticDadCombo', 0)
@@ -329,9 +331,9 @@ function initCharacterTrails()
             0.85 / trailLength
         );
 
-        bfTrail.active = false;
+        bfTrail.active = true;
         bfTrail.visible = false;
-        dadTrail.active = false;
+        dadTrail.active = true;
         dadTrail.visible = false;
 
         game.insert(game.members.indexOf(game.boyfriendGroup), bfTrail);
@@ -394,7 +396,7 @@ function initCharacterTrails()
                 var member = trail.members[i];
                 if (member == null)
                     continue;
-
+//
                 // Exact linear ramp: newest = baseAlpha, oldest = fully transparent.
                 member.alpha = baseAlpha * (1 - (i / divisor));
             }
@@ -411,33 +413,29 @@ function initCharacterTrails()
                 game.remove(bfTrail, true);
                 bfTrail.destroy();
                 bfTrail = new FlxTrail(game.boyfriend, null, trailLength, trailDelay, 0.85, 0.85 / trailLength);
-                bfTrail.active = false;
+                bfTrail.active = true;
                 bfTrail.visible = false;
                 game.insert(game.members.indexOf(game.boyfriendGroup), bfTrail);
                 game.variables.set('eclipticBFTrail', bfTrail);
                 styleTrail(bfTrail, game.boyfriend);
                 bfWasEnabled = false;
             }
-
             if (game.dad != null && dadTrail.target != game.dad)
             {
                 game.remove(dadTrail, true);
                 dadTrail.destroy();
                 dadTrail = new FlxTrail(game.dad, null, trailLength, trailDelay, 0.85, 0.85 / trailLength);
-                dadTrail.active = false;
+                dadTrail.active = true;
                 dadTrail.visible = false;
                 game.insert(game.members.indexOf(game.dadGroup), dadTrail);
                 game.variables.set('eclipticDadTrail', dadTrail);
                 styleTrail(dadTrail, game.dad);
                 dadWasEnabled = false;
             }
-
             var bfComboValue:Dynamic = game.variables.get('eclipticBFCombo');
             var dadComboValue:Dynamic = game.variables.get('eclipticDadCombo');
-
             var bfValue:Float = bfComboValue == null ? 0 : bfComboValue;
             var dadValue:Float = dadComboValue == null ? 0 : dadComboValue;
-
             bfWasEnabled = updateTrail(bfTrail, game.boyfriend, bfValue, bfWasEnabled);
             dadWasEnabled = updateTrail(dadTrail, game.dad, dadValue, dadWasEnabled);
         }, 0);
