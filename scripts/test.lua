@@ -73,8 +73,8 @@ function onCreatePost()
     gfX = getMidpointX('gf') + getProperty("girlfriendCameraOffset[0]") + getProperty("gf.cameraPosition[0]")
     gfY = getMidpointY('gf') + getProperty("girlfriendCameraOffset[1]") + getProperty("gf.cameraPosition[1]")
 
-    makeLuaText('myText', '¯\\_(ツ)_/¯', 1000, 400, 320)
-    addLuaText('myText')
+    --makeLuaText('myText', '¯\\_(ツ)_/¯', 1000, 400, 320)
+    --addLuaText('myText')
 
     defaultCamZoom = getProperty('camGame.zoom')
     defaultHUDZoom = getProperty('camHUD.zoom')
@@ -217,7 +217,7 @@ function onUpdate(elapsed)
 
 
     --setTextString('myText', "O: " .. dadCombo .. ' | B: ' .. bfCombo .. ' | D: ' .. doubleCombo .. "\n Ot: " .. dadComboTimer .. ' | Bt: ' .. bfComboTimer .. ' | Dt: ' .. doubleComboTimer)
-    setTextString('myText', "")
+    --setTextString('myText', "")
     if bfCombo < 0 then
         bfCombo = 0
     end
