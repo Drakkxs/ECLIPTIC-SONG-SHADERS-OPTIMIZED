@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="DualitySplit.png">
+    <SubTexture name="Split0000" x="0" y="0" width="480" height="270"/>
+    <SubTexture name="Split0001" x="480" y="0" width="480" height="270"/>
+    <SubTexture name="Split0002" x="969" y="0" width="480" height="270"/>
+</TextureAtlas>

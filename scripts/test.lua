@@ -1,3 +1,5 @@
+AEM_ZoomIn = true
+AEM_COLOR = 0
 local xx = 0
 local yy = 0
 local xx2 = 0
@@ -20,6 +22,11 @@ local TRAIL_SYNC_INTERVAL = 0.035
 local TRAIL_LENGTH = 8
 local TRAIL_DELAY_FRAMES = 2
 
+local cur_char_color = 0
+local char_color = 0
+
+
+
 local defaultCamZoom = 1;
 local defaultHUDZoom = 1;
 
@@ -32,7 +39,6 @@ local shaderName = 'outline'
 local BACKGROUND_DIM_COMBO_DIVISOR = 100
 local BACKGROUND_DIM_MAX_ALPHA = 0.95
 local MAX_NOTE_CAMERA_ZOOM = 0.5
-
 
 -- Scales note-hit camera zoom using the same capped progress as blackBG.
 -- doubleCombo itself remains completely uncapped.
@@ -89,6 +95,10 @@ function onCreatePost()
     initCharacterTrails()
 end
 
+function animExists(character, anim)
+    return getProperty(character .. '.animation.getByName("' .. anim .. '")') ~= nil
+end
+
 function goodNoteHit(id, noteData, noteType, isSustainNote)
     if not isSustainNote then 
         if bfComboTimer == 0 then
@@ -101,7 +111,9 @@ function goodNoteHit(id, noteData, noteType, isSustainNote)
     bfComboTimer = 150
     doubleComboTimer = 50
     if isSustainNote then return end
-    triggerEvent('Add Camera Zoom', getSharedComboCameraZoom(), '0')
+    if AEM_ZoomIn then
+        triggerEvent('Add Camera Zoom', getSharedComboCameraZoom(), '0')
+    end
     
     if noteData == 0 then -- Left
         setProperty('camGame.angle', -tfs)
@@ -124,7 +136,9 @@ function opponentNoteHit(id, noteData, noteType, isSustainNote)
     dadComboTimer = 150
     doubleComboTimer = 50
     if isSustainNote then return end
-    triggerEvent('Add Camera Zoom', getSharedComboCameraZoom(), '0')
+    if AEM_ZoomIn then
+        triggerEvent('Add Camera Zoom', getSharedComboCameraZoom(), '0')
+    end
     if noteData == 0 then -- Left
         setProperty('camGame.angle', -tfs)
     elseif noteData == 3 then -- Right
@@ -135,7 +149,6 @@ function opponentNoteHit(id, noteData, noteType, isSustainNote)
 end
 
 function onUpdate(elapsed)
-
     -- Only synchronize two numbers with Haxe at the old trail rate.
     -- The FlxTrail objects update and reuse their own fixed sprite arrays.
     trailCooldown = trailCooldown - elapsed
@@ -177,6 +190,13 @@ function onUpdate(elapsed)
         'blackBG.alpha',
         math.min(doubleCombo / BACKGROUND_DIM_COMBO_DIVISOR, BACKGROUND_DIM_MAX_ALPHA)
     )
+    char_color = math.max(math.min((doubleCombo / BACKGROUND_DIM_COMBO_DIVISOR - 0.9) * 10, 1), 0)
+    cur_char_color = cur_char_color + (char_color - cur_char_color) * 0.1
+    setVar('AEM_COLOR', cur_char_color)
+
+    setVar('AEM_INTENCITY', doubleCombo / BACKGROUND_DIM_COMBO_DIVISOR)
+    
+    --cur_char_color = cur_char_color + 0.001
 
     if math.floor(bfComboTimer) <= 0 then
         bfCombo = bfCombo * 0.9
@@ -259,7 +279,24 @@ function onUpdate(elapsed)
         triggerEvent('Camera Follow Pos','','')
     end
     
-    
+    runHaxeCode([[
+        var charColor:Int = ]] .. cur_char_color .. [[;
+        var colorChar = function(char, color:Int)
+        {
+            if (char == null)
+                return;
+
+            
+            var rgb = [char.healthColorArray[0] * color, char.healthColorArray[1] * color, char.healthColorArray[2] * color];
+            var invertedColor = 1 - color;
+            char.setColorTransform(
+                invertedColor, invertedColor, invertedColor, 1,
+                rgb[0], rgb[1], rgb[2], 0
+            );
+        };
+        colorChar(game.boyfriend, charColor);
+        colorChar(game.dad, charColor);
+    ]])
 
 end
 
@@ -272,6 +309,7 @@ function initCharacterTrails()
         var trailLength:Int = ]] .. TRAIL_LENGTH .. [[;
         var trailDelay:Int = ]] .. TRAIL_DELAY_FRAMES .. [[;
         var syncInterval:Float = ]] .. TRAIL_SYNC_INTERVAL .. [[;
+
 
         var bfTrail = new FlxTrail(
             game.boyfriend,
@@ -304,6 +342,8 @@ function initCharacterTrails()
 
         var bfWasEnabled:Bool = false;
         var dadWasEnabled:Bool = false;
+
+        
 
         // Apply a true, flat HP-bar color instead of multiplying the character's
         // original texture colors. This only needs to run when a trail is created.
@@ -342,15 +382,9 @@ function initCharacterTrails()
             var baseAlpha:Float = Math.min(combo / 250, 1) * 0.85;
             var enabled:Bool = baseAlpha > 0.02 && char.visible && char.alpha > 0;
 
-            trail.active = enabled;
+            trail.active = true;
             trail.visible = enabled;
 
-            if (!enabled)
-            {
-                if (wasEnabled)
-                    trail.resetTrail();
-                return false;
-            }
 
             var count:Int = trail.members.length;
             var divisor:Float = count > 1 ? count - 1 : 1;
@@ -409,6 +443,8 @@ function initCharacterTrails()
         }, 0);
 
         game.variables.set('eclipticTrailTimer', trailTimer);
+
+
     ]])
 end
 
