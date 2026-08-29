@@ -1,0 +1,82 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-142,
+				183
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-2,
+				184
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-7,
+				589
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				234,
+				216
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "right",
+			"indices": []
+		}
+	],
+	"vocals_file": null,
+	"results_character": null,
+	"no_antialiasing": false,
+	"image": "characters/redscreen/asrielredscreen",
+	"position": [
+		-220,
+		0
+	],
+	"speaker": null,
+	"healthicon": "asriel",
+	"flip_x": false,
+	"healthbar_colors": [
+		13,
+		1,
+		2
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 9,
+	"dead_character": null,
+	"scale": 1
+}

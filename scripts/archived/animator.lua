@@ -9,10 +9,28 @@ SingAnims = {
     'singRIGHT'
 }
 
+function selfSide()
+    return playsAsBF() and 'BF' or 'Dad'
+end
+
+function sideCharacter(side)
+    return side == 'BF' and 'boyfriend' or 'dad'
+end
+
+function sideUsesAlt(side)
+    if side == 'BF' then
+        return BFAltAnim
+    else
+        return DadAltAnim
+    end
+end
+
 function setPoseMode(enabled)
-    if posing == enabled then
+    if Posing == enabled then
         return
     end
+
+    Posing = enabled
 
     if enabled then
         runHaxeCode([[
@@ -165,14 +183,14 @@ function onNoteHit(noteData)
 end
 
 function goodNoteHit(id, noteData, noteType, isSustain)
-    if (playsAsBF() and #listPlayers() == 1) or #listPlayers() > 1 then
+    if playsAsBF() then
         onNoteHit(noteData)
     end
 
 end
 
 function opponentNoteHit(id, noteData, noteType, isSustain)
-    if (not playsAsBF() and #listPlayers() == 1) or #listPlayers() > 1 then
+    if not playsAsBF() then
         onNoteHit(noteData)
     end
 end
@@ -180,12 +198,14 @@ end
 
 function playSelfPose(anim)
     local character = playsAsBF() and 'boyfriend' or 'dad'
+    local side = selfSide()
 
     --if hasAnimation(character, anim) then
-        playAnim(character, anim, true)
+        
+        playAnim(side, anim, true)
 
         
-        sendToAll('AEMPoseAnim' .. character, anim)
+        sendToAll('AEMPoseAnim' .. side, anim)
     --end
 end
 

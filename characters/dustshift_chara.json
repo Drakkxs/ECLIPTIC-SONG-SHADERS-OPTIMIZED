@@ -1,0 +1,137 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				254,
+				35
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				49,
+				-115
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				178,
+				287
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				36,
+				6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				71,
+				-20
+			],
+			"anim": "idle-alt",
+			"fps": 24,
+			"name": "evil idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				324,
+				172
+			],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "evil left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				123,
+				24
+			],
+			"anim": "singDOWN-alt",
+			"fps": 24,
+			"name": "evil down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				128,
+				559
+			],
+			"anim": "singUP-alt",
+			"fps": 24,
+			"name": "evil up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				76,
+				46
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "evil right",
+			"indices": []
+		}
+	],
+	"vocals_file": null,
+	"results_character": null,
+	"no_antialiasing": false,
+	"image": "characters/redscreen/chararedscreen,characters/redscreen/charaevilgraw",
+	"position": [
+		0,
+		50
+	],
+	"speaker": null,
+	"healthicon": "dust-chara",
+	"flip_x": false,
+	"healthbar_colors": [
+		53,
+		72,
+		83
+	],
+	"camera_position": [
+		200,
+		0
+	],
+	"sing_duration": 9,
+	"dead_character": null,
+	"scale": 1
+}
