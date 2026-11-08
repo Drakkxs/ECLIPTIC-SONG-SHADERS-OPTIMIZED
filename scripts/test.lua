@@ -91,7 +91,12 @@ function onCreatePost()
         getObjectOrder('gfGroup')
     )
 
-    setObjectOrder('blackBG', order - 1)
+    -- debugPrint("ORDER DAD LUA MOD ECLIPTIC: " .. getObjectOrder('dadGroup'))
+    -- debugPrint("ORDER BOY LUA MOD ECLIPTIC: " .. getObjectOrder('boyfriendGroup'))
+    -- debugPrint("ORDER GF LUA MOD ECLIPTIC: " .. getObjectOrder('gfGroup'))
+
+    -- if order is below or at zero it will not appear.
+    setObjectOrder('blackBG', math.max(order - 1, 1))
 
     initCharacterTrails()
 end
@@ -149,10 +154,11 @@ function opponentNoteHit(id, noteData, noteType, isSustainNote)
     doTweenAngle('camReturn', 'camGame', 0, 0.15, 'quadOut')
 end
 
+
 function onUpdate(elapsed)
     -- Only synchronize two numbers with Haxe at the old trail rate.
     -- The FlxTrail objects update and reuse their own fixed sprite arrays.
-    trailCooldown = trailCooldown - elapsed
+    trailCooldown = (trailCooldown - (elapsed * (curBpm * 60)))
 
     if trailCooldown <= 0 then
         trailCooldown = TRAIL_SYNC_INTERVAL
