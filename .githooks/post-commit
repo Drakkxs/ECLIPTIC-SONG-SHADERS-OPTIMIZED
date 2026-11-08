@@ -1,0 +1,25 @@
+#!/bin/sh
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+PROJECT_NAME=$(basename "$REPO_ROOT")
+
+# 1. Generate the release zip archive
+git archive --format=zip --output="${REPO_ROOT}/${PROJECT_NAME}.zip" HEAD
+
+# 2. Generate the release notes from the last tag to HEAD
+PREV_TAG=$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null)
+CHANGELOG_FILE="${REPO_ROOT}/${PROJECT_NAME}-changelog.txt"
+
+echo "Changelog for ${PROJECT_NAME}" > "$CHANGELOG_FILE"
+echo "================================" >> "$CHANGELOG_FILE"
+echo "" >> "$CHANGELOG_FILE"
+
+if [ -n "$PREV_TAG" ]; then
+    echo "Changes since ${PREV_TAG}:" >> "$CHANGELOG_FILE"
+    echo "" >> "$CHANGELOG_FILE"
+    git log "${PREV_TAG}..HEAD" --pretty=format:"- %s" >> "$CHANGELOG_FILE"
+else
+    echo "Recent commits:" >> "$CHANGELOG_FILE"
+    echo "" >> "$CHANGELOG_FILE"
+    git log -n 15 --pretty=format:"- %s" >> "$CHANGELOG_FILE"
+fi

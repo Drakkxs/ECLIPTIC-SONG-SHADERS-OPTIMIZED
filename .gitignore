@@ -1,0 +1,5 @@
+# Ignore generated release archives
+*.zip
+
+# Ignore generated release notes
+*-changelog.txt
